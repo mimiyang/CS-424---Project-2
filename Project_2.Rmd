@@ -95,6 +95,22 @@ ORD_delay_day_hour <- group_by(tem3,day,hour)  %>% select(DEST_AIRPORT_ID,ORIGIN
   
 summarise(number_arrival_delay=n())
 
+# switch to 12hour or 24hour function
+
+to12hour <- function(v){ 
+  if (is.POSIXct(v)==TRUE){
+    v<- format(strptime(v,"%Y-%m-%d %H:%M:%S"),format="%Y-%m-%d %I:%M %p")
+  }
+  v
+}
+
+to24hour<-function(x){
+  if (is.POSIXct(x)==FALSE){
+    x<-as.POSIXct(aa,format="%Y-%m-%d %I:%M %p")
+  }
+  x 
+} 
+
 
 head(MDW_arr_day_hour)
 head(ORD_arr_day_hour)
