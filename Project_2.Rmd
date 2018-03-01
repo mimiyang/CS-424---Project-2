@@ -60,6 +60,12 @@ What Yang did:
 
 tem3 <- AugustData
 
+# colume named "DEST" is to match  DEST_AIRPORT_ID is added. 
+airport_code_name<- group_by(tem3,ORIGIN_AIRPORT_ID,ORIGIN) %>% summarise()
+colnames(airport_code_name)<-c("DEST_AIRPORT_ID","DEST")
+tem3 <- merge(tem3,airport_code_name)
+
+
  tem3$ARR_TIME <- sprintf("%04d", tem3$ARR_TIME)
   tem3$ARR_TIME_new <- as.POSIXct(paste(tem3$FL_DATE, tem3$ARR_TIME), format = "%Y-%m-%d %H%M" )
 
